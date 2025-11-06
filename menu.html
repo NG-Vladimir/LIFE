@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>INLIFE — Меню</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="menu-content" id="mainContent">
+    <h2>Главное меню</h2>
+    <p>Выберите раздел из нижнего меню.</p>
+  </div>
+
+  <div class="menu-content" id="eventsContent">
+    <h2>События</h2>
+    <p>Ваши события и напоминания будут здесь.</p>
+  </div>
+
+  <div class="menu-content" id="teamContent">
+    <h2>Команда</h2>
+    <p>Здесь вы сможете увидеть свою команду или добавить участников.</p>
+  </div>
+
+  <div class="menu-content" id="profileContent">
+    <h2>Профиль</h2>
+    <div class="profile-info">
+      <div class="info-item"><span>Имя:</span> <span id="profileName">—</span></div>
+      <div class="info-item"><span>Дата рождения:</span> <span id="profileBirthdate">—</span></div>
+      <div class="info-item"><span>День рождения через:</span> <span id="daysUntilBirthday">—</span></div>
+    </div>
+  </div>
+
+  <div class="nav-bar">
+    <div class="nav-item active" onclick="switchTab('main', this)">
+      <span class="material-symbols-outlined">home</span>
+      <span>Главная</span>
+    </div>
+    <div class="nav-item" onclick="switchTab('events', this)">
+      <span class="material-symbols-outlined">calendar_clock</span>
+      <span>События</span>
+    </div>
+    <div class="nav-item" onclick="switchTab('team', this)">
+      <span class="material-symbols-outlined">groups</span>
+      <span>Команда</span>
+    </div>
+    <div class="nav-item" onclick="switchTab('profile', this)">
+      <span class="material-symbols-outlined">person</span>
+      <span>Профиль</span>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
