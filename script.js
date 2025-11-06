@@ -1,60 +1,75 @@
-// === index.html ===
-if (document.getElementById('welcomeForm')) {
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>INLIFE — Меню</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
 
-  // Проверка localStorage: если данные есть, сразу идём в menu.html
-  const storedName = localStorage.getItem('userName');
-  const storedBirth = localStorage.getItem('userBirthdate');
-  if(storedName && storedBirth){
-    window.location.href = 'menu.html';
-  }
+  <!-- Контент меню -->
+  <div class="menu-content" id="mainContent">
+    <h2>Главное меню</h2>
+    <p>Выберите раздел из нижнего меню.</p>
+  </div>
 
-  document.getElementById('welcomeForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const name = document.getElementById('name').value.trim();
-    const birthdate = document.getElementById('birthdate').value;
+  <div class="menu-content" id="eventsContent" style="display: none;">
+    <h2>События</h2>
+    <p>Здесь будут ваши события и напоминания.</p>
+  </div>
 
-    if(!name || !birthdate){
-      alert("Пожалуйста, заполните все поля.");
-      return;
-    }
+  <div class="menu-content" id="teamContent" style="display: none;">
+    <h2>Команда</h2>
+    <p>Здесь вы сможете увидеть свою команду или добавить участников.</p>
+  </div>
 
-    const today = new Date().toISOString().split("T")[0];
-    if(birthdate > today){
-      alert("Дата рождения не может быть из будущего!");
-      return;
-    }
+  <div class="menu-content" id="profileContent" style="display: none;">
+    <h2>Профиль</h2>
+    <div class="profile-info">
+      <div class="info-item">
+        <span>Имя:</span>
+        <span id="profileName">—</span>
+      </div>
+      <div class="info-item">
+        <span>Дата рождения:</span>
+        <span id="profileBirthdate">—</span>
+      </div>
+      <div class="info-item">
+        <span>Дней до дня рождения:</span>
+        <span id="daysUntilBirthday">—</span>
+      </div>
+    </div>
+  </div>
 
-    localStorage.setItem('userName', name);
-    localStorage.setItem('userBirthdate', birthdate);
-    window.location.href = 'menu.html';
-  });
-}
+  <!-- Нижняя панель навигации -->
+  <div class="nav-bar">
+    <div class="nav-item active" onclick="switchTab('main', this)">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z"/>
+      </svg>
+      <span>Главная</span>
+    </div>
+    <div class="nav-item" onclick="switchTab('events', this)">
+      <span class="material-symbols-outlined">calendar_month</span>
+      <span>События</span>
+    </div>
+    <div class="nav-item" onclick="switchTab('team', this)">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M16 11c1.66 0 3-1.34 3-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 3-1.34 3-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c1.66 0 3 1.34 3 3v3H5v-3c0-1.66 1.34-3 3-3zm8 0c1.66 0 3 1.34 3 3v3h-6v-3c0-1.66 1.34-3 3-3z"/>
+      </svg>
+      <span>Команда</span>
+    </div>
+    <div class="nav-item" onclick="switchTab('profile', this)">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+      </svg>
+      <span>Профиль</span>
+    </div>
+  </div>
 
-// === menu.html ===
-if(document.querySelector('.nav-bar')){
-  document.addEventListener('DOMContentLoaded', () => {
-    const name = localStorage.getItem('userName');
-    const birthdate = localStorage.getItem('userBirthdate');
-
-    if(name && birthdate){
-      document.getElementById('profileName').textContent = name;
-      const date = new Date(birthdate);
-      document.getElementById('profileBirthdate').textContent = date.toLocaleDateString('ru-RU', {day:'2-digit', month:'long'});
-      let nextBirthday = new Date(new Date().getFullYear(), date.getMonth(), date.getDate());
-      if(nextBirthday < new Date()) nextBirthday.setFullYear(new Date().getFullYear()+1);
-      const diffDays = Math.ceil((nextBirthday - new Date())/(1000*60*60*24));
-      document.getElementById('daysUntilBirthday').textContent = diffDays + ' дней';
-    }
-
-    // показываем главную вкладку по умолчанию
-    switchTab('main', document.querySelector('.nav-item.active'));
-  });
-
-  window.switchTab = function(tab, element){
-    document.querySelectorAll('.menu-content').forEach(el => el.classList.remove('active'));
-    document.getElementById(tab+'Content').classList.add('active');
-
-    document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-    if(element) element.classList.add('active');
-  }
-}
+  <script src="script.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</body>
+</html>
