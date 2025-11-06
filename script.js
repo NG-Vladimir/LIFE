@@ -1,6 +1,5 @@
 // === index.html ===
 if(document.getElementById('welcomeForm')) {
-
   const storedName = localStorage.getItem('userName');
   const storedBirth = localStorage.getItem('userBirthdate');
   if(storedName && storedBirth){
@@ -77,4 +76,4 @@ if(document.querySelector('.nav-bar')){
     document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
     if(element) element.classList.add('active');
   }
-}
+} 
