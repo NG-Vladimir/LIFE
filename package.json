@@ -20,6 +20,7 @@
   "homepage": "https://github.com/NG-Vladimir/LIFE#readme",
   "dependencies": {
     "dotenv": "^17.2.3",
+    "express": "^5.1.0",
     "node-telegram-bot-api": "^0.66.0"
   }
 }
